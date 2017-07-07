@@ -1,0 +1,134 @@
+@font-face {
+	font-family: 'streetfighter';
+	src: url('../fonts/ssf4_abuket.woff2') format('woff2'),
+	url('../fonts/ssf4_abuket.woff') format('woff'),
+	url('../fonts/ssf4_abuket.ttf')  format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+html, body {
+	height: 100%;
+	width: 100%;
+	position: fixed;
+}
+
+h1 {
+	font-family: 'streetfighter', arial, sans-serif;
+	text-align: center;
+	padding: 40px;
+	background: #e64517; /* Old browsers */
+	background: -moz-linear-gradient(top, #e64517 0%, #fad32d 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #e64517 0%,#fad32d 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #e64517 0%,#fad32d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e64517', endColorstr='#fad32d',GradientType=0 ); /* IE6-9 */
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+h1::first-letter {
+	font-size: 150%;
+}
+
+
+h2 {
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+}
+
+
+.bgImage {
+	position: relative;
+	height: 100%;
+	background-image: url("../images/bg.jpg");
+	background-position: center;
+	background-size: cover; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.logo {
+	width: auto;
+	height: 250px;
+	margin: 0 auto;
+}
+
+.gameEdition {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 30px;
+	-webkit-text-stroke: 1px black;
+	color: white;
+	text-shadow:
+	3px 3px 0 #000,
+	-1px -1px 0 #000,  
+	1px -1px 0 #000,
+	-1px 1px 0 #000,
+	1px 1px 0 #000;
+}
+
+.healthBar {
+	margin: 10px;
+	height: 40px;
+}
+
+.characters {
+	position: absolute;
+	left: 0;
+	bottom: 3px;
+}
+
+#fighterRight img {
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+	filter: FlipH;
+	-ms-filter: "FlipH";
+}
+
+.thumb {
+	margin: 0;
+	background: black;
+	border: 2px solid white;
+}
+
+.fighterPortrait {
+	position: relative; 
+	margin: 0 auto;
+	animation-duration: 0.5s;
+	animation-name: slidein;
+}
+
+@keyframes slidein {
+	from {
+		margin-left: -100%;
+	}
+
+	to {
+		margin-left: 0%;
+	}
+}
+
+.fighterNickname {
+	font-size: 80px;
+	position: absolute; 
+	bottom: 200px; 
+	left: 0; 
+	width: 100%;
+	-webkit-text-stroke: 3px black;
+	color: white;
+	text-shadow:
+	3px 3px 0 #FFF,
+	-1px -1px 0 #FFF,  
+	1px -1px 0 #FFF,
+	-1px 1px 0 #FFF,
+	1px 1px 0 #FFF;
+}
+
+.hideTheme {
+	display: none;
+}
+
+
