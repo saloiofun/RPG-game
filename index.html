@@ -3,7 +3,10 @@
 <head>
 	<title>Street Fighter IV - RPG Edition</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+	<script
+	src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:500" rel="stylesheet">
@@ -13,59 +16,58 @@
 <body>
 	<div class="container-fluid bgImage">
 		<div class="row">
-			<div id="fighterLeft" class="col-5">
+			<div id="player" class="col-5">
 				<div class="healthBar"></div>
-				<img src="assets/images/ryu.png" alt="ryu" class="img-fluid float-left">
-				<h1 class="fighterNickname">Ryu</h1>
+				<h1 class="fighterNickname"></h1>
 			</div>
 			<div id="buttons" class="col-2">
 				<img src="assets/images/logo.png" alt="logo" class="img-fluid">
 				<p class="gameEdition text-center">RPG Edition</p>
 			</div>
-			<div id="fighterRight" class="col-5">
+			<div id="challenger" class="col-5">
 				<div class="healthBar"></div>
 				<img src="assets/images/ryu.png" alt="ryu" class="img-fluid float-right">
-				<h1 class="fighterNickname">Ryu</h1>
+				<h1 class="fighterNickname"></h1>
 			</div>
 		</div>
 		<div class="characters">
 			<div class="row justify-content-md-center no-gutters">
-				<div class="col-1 thumb">
-					<img src="assets/images/ryu.png" alt="ryu" class="img-fluid text-center">
+				<div class="col-1 fighterSelect" value="ryu">
+					<img src="assets/images/ryu.png" alt="Ryu" class="img-fluid text-center">
 				</div>
-				<div class="col-1 thumb">
-					<img src="assets/images/ken.png" alt="ryu" class="img-fluid text-center">
+				<div class="col-1 fighterSelect" value="ken">
+					<img src="assets/images/ken.png" alt="Ken" class="img-fluid text-center">
 				</div>
-				<div class="col-1 thumb">
-					<img src="assets/images/akuma.png" alt="ryu" class="img-fluid text-center">
+				<div class="col-1 fighterSelect" value="akuma">
+					<img src="assets/images/akuma.png" alt="Akuma" class="img-fluid text-center">
 				</div>
-				<div class="col-1 thumb">
-					<img src="assets/images/dan.png" alt="ryu" class="img-fluid text-center">
+				<div class="col-1 fighterSelect" value="dan">
+					<img src="assets/images/dan.png" alt="Dan" class="img-fluid text-center">
 				</div>
-				<div class="col-1 thumb">
-					<img src="assets/images/dhalsim.png" alt="ryu" class="img-fluid text-center">
+				<div class="col-1 fighterSelect" value="dhalsim">
+					<img src="assets/images/dhalsim.png" alt="Dhalsim" class="img-fluid text-center">
 				</div>
 			</div>
 			<div class="row justify-content-md-center no-gutters">
-				<div class="col-1 thumb">
-					<img src="assets/images/chunLi.png" alt="ryu" class="img-fluid text-center">
+				<div class="col-1 fighterSelect" value="chunLi">
+					<img src="assets/images/chunLi.png" alt="Chun Li" class="img-fluid text-center">
 				</div>
-				<div class="col-1 thumb">
-					<img src="assets/images/elFuerte.png" alt="ryu" class="img-fluid text-center">
+				<div class="col-1 fighterSelect" value="elFuerte">
+					<img src="assets/images/elFuerte.png" alt="El Fuerte" class="img-fluid text-center">
 				</div>
-				<div class="col-1 thumb">
-					<img src="assets/images/guile.png" alt="ryu" class="img-fluid text-center">
+				<div class="col-1 fighterSelect" value="guile">
+					<img src="assets/images/guile.png" alt="Guile" class="img-fluid text-center">
 				</div>
-				<div class="col-1 thumb">
-					<img src="assets/images/feiLong.png" alt="ryu" class="img-fluid text-center">
+				<div class="col-1 fighterSelect" value="feiLong">
+					<img src="assets/images/feiLong.png" alt="Fei Long" class="img-fluid text-center">
 				</div>
-				<div class="col-1 thumb">
-					<img src="assets/images/sakura.png" alt="ryu" class="img-fluid text-center">
+				<div class="col-1 fighterSelect" value="sakura">
+					<img src="assets/images/sakura.png" alt="Sakura" class="img-fluid text-center">
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- <script type="text/javascript" src="assets/javascript/game.js"></script> -->
+	<script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
 </html>
