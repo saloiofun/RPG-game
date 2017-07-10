@@ -68,20 +68,6 @@ h2 {
 	1px 1px 0 #000;
 }
 
-.healthBar {
-	margin: 10px;
-	height: 40px;
-}
-
-#challenger img {
-	-moz-transform: scaleX(-1);
-	-o-transform: scaleX(-1);
-	-webkit-transform: scaleX(-1);
-	transform: scaleX(-1);
-	filter: FlipH;
-	-ms-filter: "FlipH";
-}
-
 .characters {
 	position: absolute;
 	left: 0;
@@ -102,18 +88,47 @@ h2 {
 	border: 3px solid red;
 }
 
-.playerAnimation {
-	animation-duration: 0.2s;
-	animation-name: slidein;
+#challenger img {
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+	filter: FlipH;
+	-ms-filter: "FlipH";
 }
 
-@keyframes slidein {
+.healthBar {
+	margin: 10px;
+	height: 40px;
+}
+
+.playerAnimation {
+	animation-duration: 0.2s;
+	animation-name: leftSlidein;
+}
+
+@keyframes leftSlidein {
 	from {
 		margin-left: -100%;
 	}
 
 	to {
 		margin-left: 0%;
+	}
+}
+
+.challengerAnimation {
+	animation-duration: 0.2s;
+	animation-name: rightSlidein;
+}
+
+@keyframes rightSlidein {
+	from {
+		margin-right: -100%;
+	}
+
+	to {
+		margin-right: 0%;
 	}
 }
 
@@ -131,6 +146,10 @@ h2 {
 	1px -1px 0 #FFF,
 	-1px 1px 0 #FFF,
 	1px 1px 0 #FFF;
+}
+
+.fighterStats {
+	border: 2px solid blue;
 }
 
 .hideTheme {

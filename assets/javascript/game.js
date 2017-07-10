@@ -8,8 +8,8 @@ var fighters = {
 		nickname: "Akuma",
 		health: 850,
 		attack: 30,
-		defense: 40,
-		sound: "https://www.youtube.com/embed/hTD3LhS7TXE?",
+		counterAttack: 40,
+		selected: false,
 		image: "akuma.png"
 	},
 
@@ -18,8 +18,8 @@ var fighters = {
 		nickname: "Chun-Li",
 		health: 950,
 		attack: 20,
-		defense: 40,
-		sound: "https://www.youtube.com/embed/EWk3Pm6M3-I?",
+		counterAttack: 40,
+		selected: false,
 		image: "chunLi.png"
 	},
 
@@ -28,8 +28,8 @@ var fighters = {
 		nickname: "Dan",
 		health: 1000,
 		attack: 25,
-		defense: 25,
-		sound: "https://www.youtube.com/embed/lmSYC2N8sbs?",
+		counterAttack: 25,
+		selected: false,
 		image: "dan.png"
 	},
 
@@ -38,8 +38,8 @@ var fighters = {
 		nickname: "Dhalsim",
 		health: 900,
 		attack: 30,
-		defense: 30,
-		sound: "https://www.youtube.com/embed/P8zF56ol5Gs?",
+		counterAttack: 30,
+		selected: false,
 		image: "dhalsim.png"
 	},
 
@@ -48,8 +48,8 @@ var fighters = {
 		nickname: "Ken",
 		health: 1000,
 		attack: 30,
-		defense: 30,
-		sound: "https://www.youtube.com/embed/Je7u4onLVC8?",
+		counterAttack: 30,
+		selected: false,
 		image: "ken.png"
 	},
 
@@ -58,8 +58,8 @@ var fighters = {
 		nickname: "Ryu",
 		health: 1000,
 		attack: 30,
-		defense: 30,
-		sound: "https://www.youtube.com/embed/swPlzzavzWg?",
+		counterAttack: 30,
+		selected: false,
 		image: "ryu.png"
 	},
 
@@ -68,8 +68,8 @@ var fighters = {
 		nickname: "Sakura",
 		health: 950,
 		attack: 25,
-		defense: 25,
-		sound: "https://www.youtube.com/embed/2gWGbmGD7r8?",
+		counterAttack: 25,
+		selected: false,
 		image: "sakura.png"
 	},
 
@@ -78,8 +78,8 @@ var fighters = {
 		nickname: "El Fuerte",
 		health: 900,
 		attack: 30,
-		defense: 30,
-		sound: "https://www.youtube.com/embed/FDrBjA9SCPI?",
+		counterAttack: 30,
+		selected: false,
 		image: "elFuerte.png"
 	},
 
@@ -88,8 +88,8 @@ var fighters = {
 		nickname: "Guile",
 		health: 950,
 		attack: 20,
-		defense: 30,
-		sound: "https://www.youtube.com/embed/Q6XM3fDUxLg?",
+		counterAttack: 30,
+		selected: false,
 		image: "guile.png"
 	},
 
@@ -98,8 +98,8 @@ var fighters = {
 		nickname: "Fei Long",
 		health: 1000,
 		attack: 30,
-		defense: 30,
-		sound: "https://www.youtube.com/embed/kTLwCx6spkU?",
+		counterAttack: 30,
+		selected: false,
 		image: "feiLong.png"
 	}
 };
@@ -110,6 +110,8 @@ var fighters = {
 	// var fighters = [akuma, chunLi, dan, dhalsim, ken, ryu, sakura, elFuerte, guile, feiLong];
 	var wins = 0;
 	var imagesPath = "assets/images/";
+	var isPlayerSelected = false;
+	var isChallengerSelected = false;
 	
 	// // Create fighters
 
@@ -143,36 +145,84 @@ var fighters = {
 	// 	$(this).appendTo("#fighter");
 	// });
 
-	$(".fighterSelect").hover(
-		function () {
+	var fighterStats = function (obj) {
+		var health = fighters[obj].health;
+		var attack = fighters[obj].attack;
+		var counterAttack = fighters[obj].counterAttack;
+		var printStats = health + "<br>" + attack + "<br>" + counterAttack;
+
+		return printStats;
+	};
+
+	var onHover = function () {
+		if (!isPlayerSelected && !fighters[$(this).attr("value")].selected) {
 			$(this).addClass("playerHover");
 
 			if ( $("#player img").length ) {
 				$("#player img").remove();
+				$("#player ")
 			}
 
 			var playerImage = $("<img>");
 			playerImage.addClass("img-fluid float-left playerAnimation");
-			playerImage.attr("src", "assets/images/" + fighters[$(this).attr("value")].image);
+			playerImage.attr("src", imagesPath + fighters[$(this).attr("value")].image);
 			playerImage.attr("alt", fighters[$(this).attr("value")].name);
 
-			$("#player").append(playerImage);
+			$("#player .fighterNickname").before(playerImage);
 
 			$("#player .fighterNickname").text(fighters[$(this).attr("value")].nickname);
-			
-		},
 
-		function () {
-			$(this).removeClass("playerHover");
-			$("#player img").removeClass("playerAnimation");
+			// var row = $("<div>");
+			// row.addClass("row");
 
+			// var col = $("<div>");
+			// row.addClass("col-2 fighterStats");
+
+			// var stats = $("<p>");
+			// stats.text(fighterStats($(this).attr("value")));
+
+			// row.append(col.append(stats));
+
+			// $("#player").append(row);
+
+		} else if (!isChallengerSelected && !fighters[$(this).attr("value")].selected) {
+			$(this).addClass("challengerHover");
+
+			if ( $("#challenger img").length ) {
+				$("#challenger img").remove();
+			}
+
+			var challengerImage = $("<img>");
+			challengerImage.addClass("img-fluid float-right challengerAnimation");
+			challengerImage.attr("src", imagesPath + fighters[$(this).attr("value")].image);
+			challengerImage.attr("alt", fighters[$(this).attr("value")].name);
+
+			$("#challenger .fighterNickname").before(challengerImage);
+
+			$("#challenger .fighterNickname").text(fighters[$(this).attr("value")].nickname);
 		}
-		);
+	};
 
-	// $(".fighterSelect").on("click", function () {
-	// 	console.log($(this).attr("value"));
-	// 	});
+	var outHover = function () {
+		if (!isPlayerSelected) {
+			$(this).removeClass("playerHover");
+		} else if (!isChallengerSelected) {
+			$(this).removeClass("challengerHover");
+		}
+	};
 
-	// })
+	$(".fighterSelect").hover( onHover, outHover );
+
+	$(".fighterSelect").on("click", function () {
+		if (!isPlayerSelected && !isChallengerSelected) {
+			isPlayerSelected = true;
+			fighters[$(this).attr("value")].selected = true;
+			$(this).addClass("playerHover");
+		}
+		else {
+			isChallengerSelected = true;
+			$(this).addClass("challengerHover");
+		} 
+	});
 
 });
