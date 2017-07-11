@@ -6,9 +6,9 @@ var fighters = {
 	ryu: {
 		nickname: "Ryu",
 		value: "ryu",
-		health: 980,
+		health: 1000,
 		attack: 30,
-		counterAttack: 50,
+		counterAttack: 45,
 		selected: false,
 		active: false,
 		image: "ryu.png"
@@ -17,9 +17,9 @@ var fighters = {
 	ken: {
 		nickname: "Ken",
 		value: "ken",
-		health: 980,
+		health: 1000,
 		attack: 25,
-		counterAttack: 55,
+		counterAttack: 45,
 		selected: false,
 		active: false,
 		image: "ken.png"
@@ -30,7 +30,7 @@ var fighters = {
 		value: "akuma",
 		health: 900,
 		attack: 30,
-		counterAttack: 55,
+		counterAttack: 45,
 		selected: false,
 		active: false,
 		image: "akuma.png"
@@ -41,7 +41,7 @@ var fighters = {
 		value: "dan",
 		health: 1000,
 		attack: 20,
-		counterAttack: 40,
+		counterAttack: 35,
 		selected: false,
 		active: false,
 		image: "dan.png"
@@ -52,7 +52,7 @@ var fighters = {
 		value: "dhalsim",
 		health: 900,
 		attack: 25,
-		counterAttack: 45,
+		counterAttack: 40,
 		selected: false,
 		active: false,
 		image: "dhalsim.png"
@@ -63,7 +63,7 @@ var fighters = {
 		value: "chunLi",
 		health: 950,
 		attack: 35,
-		counterAttack: 40,
+		counterAttack: 35,
 		selected: false,
 		active: false,
 		image: "chunLi.png"
@@ -74,7 +74,7 @@ var fighters = {
 		value: "sakura",
 		health: 950,
 		attack: 20,
-		counterAttack: 35,
+		counterAttack: 30,
 		selected: false,
 		active: false,
 		image: "sakura.png"
@@ -85,7 +85,7 @@ var fighters = {
 		value: "guile",
 		health: 950,
 		attack: 30,
-		counterAttack: 45,
+		counterAttack: 40,
 		selected: false,
 		active: false,
 		image: "guile.png"
@@ -96,7 +96,7 @@ var fighters = {
 		value: "elFuerte",
 		health: 900,
 		attack: 30,
-		counterAttack: 40,
+		counterAttack: 35,
 		selected: false,
 		active: false,
 		image: "elFuerte.png"
@@ -107,7 +107,7 @@ var fighters = {
 		value: "feiLong",
 		health: 950,
 		attack: 25,
-		counterAttack: 45,
+		counterAttack: 40,
 		selected: false,
 		active: false,
 		image: "feiLong.png"
@@ -121,6 +121,7 @@ var challenger;
 var defaultAttackPoint;
 var isPlayerSelected = false;
 var isChallengerSelected = false;
+$("#attack").attr("disabled","disabled");
 
 //push fighters objects into fightersArray
 $.each(fighters, function(key) {
@@ -155,28 +156,33 @@ var fighterStats = function (obj, element) {
 	$(element).append(counterAttack);
 };
 
+var fighterSlide = function(obj, fighter) {
+
+	if ( $("#" + fighter + " img").length ) {
+		$("#" + fighter + " img").remove();
+		$("." + fighter + "Stats").empty();
+	}
+
+	var fighterImage = $("<img>");
+	fighterImage.addClass("img-fluid");
+	fighterImage.attr("src", imagesPath + obj.image);
+	fighterImage.attr("alt", obj.name);
+
+	$("#"+fighter + " .fighterNickname").before(fighterImage);
+
+	$("#"+fighter + " .fighterNickname").text(obj.nickname);
+
+	fighterStats(obj, "."+fighter+"Stats");
+}
+
 var onHover = function () {
 	if (!isPlayerSelected && !fighters[$(this).attr("value")].selected) {
-
+		
 		player = fighters[$(this).attr("value")];
 
 		$(this).addClass("playerHover");
 
-		if ( $("#player img").length ) {
-			$("#player img").remove();
-			$(".playerStats").empty();
-		}
-
-		var fighterImage = $("<img>");
-		fighterImage.addClass("img-fluid playerSlide");
-		fighterImage.attr("src", imagesPath + player.image);
-		fighterImage.attr("alt", player.name);
-
-		$("#player .fighterNickname").before(fighterImage);
-
-		$("#player .fighterNickname").text(player.nickname);
-
-		fighterStats(player, ".playerStats");
+		fighterSlide(player, "player");
 
 	} else if (!isChallengerSelected && !fighters[$(this).attr("value")].selected) {
 
@@ -184,21 +190,7 @@ var onHover = function () {
 
 		$(this).addClass("challengerHover");
 
-		if ( $("#challenger img").length ) {
-			$("#challenger img").remove();
-			$(".challengerStats").empty();
-		}
-
-		var fighterImage = $("<img>");
-		fighterImage.addClass("img-fluid challengerSlide");
-		fighterImage.attr("src", imagesPath + challenger.image);
-		fighterImage.attr("alt", challenger.name);
-
-		$("#challenger .fighterNickname").before(fighterImage);
-
-		$("#challenger .fighterNickname").text(challenger.nickname);
-
-		fighterStats(challenger, ".challengerStats");
+		fighterSlide(challenger, "challenger");
 	}
 };
 
@@ -227,6 +219,8 @@ $(".fighterSelect").on("click", function () {
 		$("#attack").removeAttr("disabled","disabled");
 		$(this).addClass("challengerHover noCursor");
 		$(".characters").addClass("noCursor");
+		$("#attack").removeAttr("disabled","disabled");
+		$("#result").empty();
 	} 
 
 	else if (!isChallengerSelected && player === fighters[$(this).attr("value")] && !player.active) {
@@ -240,8 +234,17 @@ $(".fighterSelect").on("click", function () {
 		isChallengerSelected = false;
 		$(this).removeClass("playerHover noCursor");
 		$(".characters").removeClass("noCursor");
+		$("#attack").attr("disabled","disabled");
 	}
 });
+
+var updateFightersInfo = function(obj, fighter) {
+	$("div[value=" + obj.value + "]").addClass("defeated");
+	$("div[value=" + obj.value + "]").removeClass(fighter+"Hover");
+	$(".characters").removeClass("noCursor");
+	obj.defeated = true;
+	$("#attack").attr("disabled","disabled");
+}
 
 $("#attack").on("click", function() {
 
@@ -254,26 +257,25 @@ $("#attack").on("click", function() {
 	challenger.health -= player.attack;
 	player.attack += defaultAttackPoint;
 
-	if (challenger.health > 0 ) player.health -= challenger.counterAttack;
+	player.health -= challenger.counterAttack;
 
 	fighterStats(player, ".playerStats");
 	fighterStats(challenger, ".challengerStats");
 
-	if (player.health <= 0) {
-		$("div[value=" + player.value + "]").addClass("defeated");
-		$("div[value=" + player.value + "]").removeClass("playerHover");
-		$(".characters").removeClass("noCursor");
-		player.defeated = true;
-		$("#attack").attr("disabled","disabled");
-	}
 
-	if (challenger.health <= 0) {
-		$("div[value=" + challenger.value + "]").addClass("defeated");
-		$("div[value=" + challenger.value + "]").removeClass("challengerHover");
-		$(".characters").removeClass("noCursor");
-		challenger.defeated = true;
+	if (player.health <= 0 && challenger.health <= 0) {
+		updateFightersInfo(player,"player");
+		updateFightersInfo(challenger,"challenger");
+		$("#result").html("You <span>L</span>ose");
+	}
+	else if (player.health <= 0) {
+		updateFightersInfo(player,"player");
+		$("#result").html("You <span>L</span>ose");
+	}
+	else if (challenger.health <= 0) {
+		updateFightersInfo(challenger,"challenger");
 		isChallengerSelected = false;
-		$("#attack").attr("disabled","disabled");
+		$("#result").html("You <span>W</span>in");
 	}
 });
 

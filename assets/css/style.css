@@ -30,6 +30,10 @@ h1::first-letter {
 	font-size: 150%;
 }
 
+h1 span {
+	font-size: 150%;
+}
+
 
 h2 {
 	font-family: 'Montserrat', sans-serif;
@@ -93,21 +97,12 @@ h2 {
 	border: 2px solid red;
 }
 
-#challenger img {
-	-moz-transform: scaleX(-1);
-	-o-transform: scaleX(-1);
-	-webkit-transform: scaleX(-1);
-	transform: scaleX(-1);
-	filter: FlipH;
-	-ms-filter: "FlipH";
+#player, #challenger {
+	margin-top: 50px;
 }
 
-.healthBar {
-	margin: 10px;
-	height: 40px;
-}
-
-.playerSlide {
+#player img {
+	float: left;
 	animation-duration: 0.2s;
 	animation-name: leftSlidein;
 }
@@ -122,9 +117,16 @@ h2 {
 	}
 }
 
-.challengerSlide {
+#challenger img {
+	float: right;
 	animation-duration: 0.2s;
 	animation-name: rightSlidein;
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+	filter: FlipH;
+	-ms-filter: "FlipH";
 }
 
 @keyframes rightSlidein {
