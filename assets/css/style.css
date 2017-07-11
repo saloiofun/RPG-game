@@ -107,7 +107,7 @@ h2 {
 	height: 40px;
 }
 
-.playerAnimation {
+.playerSlide {
 	animation-duration: 0.2s;
 	animation-name: leftSlidein;
 }
@@ -122,7 +122,7 @@ h2 {
 	}
 }
 
-.challengerAnimation {
+.challengerSlide {
 	animation-duration: 0.2s;
 	animation-name: rightSlidein;
 }
@@ -133,7 +133,7 @@ h2 {
 	}
 
 	to {
-		margin-right: 0%;
+		margin-left: 0%;
 	}
 }
 

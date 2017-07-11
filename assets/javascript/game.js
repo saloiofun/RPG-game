@@ -6,9 +6,9 @@ var fighters = {
 	ryu: {
 		nickname: "Ryu",
 		value: "ryu",
-		health: 1000,
+		health: 980,
 		attack: 30,
-		counterAttack: 40,
+		counterAttack: 50,
 		selected: false,
 		active: false,
 		image: "ryu.png"
@@ -17,9 +17,9 @@ var fighters = {
 	ken: {
 		nickname: "Ken",
 		value: "ken",
-		health: 1000,
-		attack: 30,
-		counterAttack: 40,
+		health: 980,
+		attack: 25,
+		counterAttack: 55,
 		selected: false,
 		active: false,
 		image: "ken.png"
@@ -29,8 +29,8 @@ var fighters = {
 		nickname: "Akuma",
 		value: "akuma",
 		health: 900,
-		attack: 40,
-		counterAttack: 40,
+		attack: 30,
+		counterAttack: 55,
 		selected: false,
 		active: false,
 		image: "akuma.png"
@@ -40,8 +40,8 @@ var fighters = {
 		nickname: "Dan",
 		value: "dan",
 		health: 1000,
-		attack: 25,
-		counterAttack: 35,
+		attack: 20,
+		counterAttack: 40,
 		selected: false,
 		active: false,
 		image: "dan.png"
@@ -51,8 +51,8 @@ var fighters = {
 		nickname: "Dhalsim",
 		value: "dhalsim",
 		health: 900,
-		attack: 30,
-		counterAttack: 35,
+		attack: 25,
+		counterAttack: 45,
 		selected: false,
 		active: false,
 		image: "dhalsim.png"
@@ -62,8 +62,8 @@ var fighters = {
 		nickname: "Chun-Li",
 		value: "chunLi",
 		health: 950,
-		attack: 40,
-		counterAttack: 30,
+		attack: 35,
+		counterAttack: 40,
 		selected: false,
 		active: false,
 		image: "chunLi.png"
@@ -73,7 +73,7 @@ var fighters = {
 		nickname: "Sakura",
 		value: "sakura",
 		health: 950,
-		attack: 25,
+		attack: 20,
 		counterAttack: 35,
 		selected: false,
 		active: false,
@@ -85,7 +85,7 @@ var fighters = {
 		value: "guile",
 		health: 950,
 		attack: 30,
-		counterAttack: 30,
+		counterAttack: 45,
 		selected: false,
 		active: false,
 		image: "guile.png"
@@ -106,8 +106,8 @@ var fighters = {
 		nickname: "Fei Long",
 		value: "feiLong",
 		health: 950,
-		attack: 30,
-		counterAttack: 40,
+		attack: 25,
+		counterAttack: 45,
 		selected: false,
 		active: false,
 		image: "feiLong.png"
@@ -115,7 +115,6 @@ var fighters = {
 };
 
 var fightersArray = [];
-var wins = 0;
 var imagesPath = "assets/images/";
 var player;
 var challenger;
@@ -168,12 +167,12 @@ var onHover = function () {
 			$(".playerStats").empty();
 		}
 
-		var playerImage = $("<img>");
-		playerImage.addClass("img-fluid playerAnimation");
-		playerImage.attr("src", imagesPath + player.image);
-		playerImage.attr("alt", player.name);
+		var fighterImage = $("<img>");
+		fighterImage.addClass("img-fluid playerSlide");
+		fighterImage.attr("src", imagesPath + player.image);
+		fighterImage.attr("alt", player.name);
 
-		$("#player .fighterNickname").before(playerImage);
+		$("#player .fighterNickname").before(fighterImage);
 
 		$("#player .fighterNickname").text(player.nickname);
 
@@ -190,12 +189,12 @@ var onHover = function () {
 			$(".challengerStats").empty();
 		}
 
-		var challengerImage = $("<img>");
-		challengerImage.addClass("img-fluid challengerAnimation");
-		challengerImage.attr("src", imagesPath + challenger.image);
-		challengerImage.attr("alt", challenger.name);
+		var fighterImage = $("<img>");
+		fighterImage.addClass("img-fluid challengerSlide");
+		fighterImage.attr("src", imagesPath + challenger.image);
+		fighterImage.attr("alt", challenger.name);
 
-		$("#challenger .fighterNickname").before(challengerImage);
+		$("#challenger .fighterNickname").before(fighterImage);
 
 		$("#challenger .fighterNickname").text(challenger.nickname);
 
@@ -259,6 +258,14 @@ $("#attack").on("click", function() {
 
 	fighterStats(player, ".playerStats");
 	fighterStats(challenger, ".challengerStats");
+
+	if (player.health <= 0) {
+		$("div[value=" + player.value + "]").addClass("defeated");
+		$("div[value=" + player.value + "]").removeClass("playerHover");
+		$(".characters").removeClass("noCursor");
+		player.defeated = true;
+		$("#attack").attr("disabled","disabled");
+	}
 
 	if (challenger.health <= 0) {
 		$("div[value=" + challenger.value + "]").addClass("defeated");
