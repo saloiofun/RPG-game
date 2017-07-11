@@ -196,9 +196,3 @@ h2 {
 .defeated img {
 	filter: grayscale(100%);
 }
-
-.hideTheme {
-	display: none;
-}
-
-
