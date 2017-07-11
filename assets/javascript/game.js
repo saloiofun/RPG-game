@@ -225,6 +225,7 @@ $(".fighterSelect").on("click", function () {
 		challenger = fighters[$(this).attr("value")];
 		challenger.selected = true;
 		isChallengerSelected = true;
+		$("#attack").removeAttr("disabled","disabled");
 		$(this).addClass("challengerHover noCursor");
 		$(".characters").addClass("noCursor");
 	} 
