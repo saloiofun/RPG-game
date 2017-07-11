@@ -3,226 +3,274 @@ $(document).ready(function() {
 // Street Fighter Characters
 var fighters = {
 
-	akuma: {
-		name: "Akuma",
-		nickname: "Akuma",
-		health: 850,
+	ryu: {
+		nickname: "Ryu",
+		value: "ryu",
+		health: 1000,
 		attack: 30,
 		counterAttack: 40,
 		selected: false,
+		active: false,
+		image: "ryu.png"
+	},
+
+	ken: {
+		nickname: "Ken",
+		value: "ken",
+		health: 1000,
+		attack: 30,
+		counterAttack: 40,
+		selected: false,
+		active: false,
+		image: "ken.png"
+	},
+
+	akuma: {
+		nickname: "Akuma",
+		value: "akuma",
+		health: 900,
+		attack: 40,
+		counterAttack: 40,
+		selected: false,
+		active: false,
 		image: "akuma.png"
 	},
 
-	chunLi: {
-		name: "Chun-Li",
-		nickname: "Chun-Li",
-		health: 950,
-		attack: 20,
-		counterAttack: 40,
-		selected: false,
-		image: "chunLi.png"
-	},
-
 	dan: {
-		name: "Dan Hibiki",
 		nickname: "Dan",
+		value: "dan",
 		health: 1000,
 		attack: 25,
-		counterAttack: 25,
+		counterAttack: 35,
 		selected: false,
+		active: false,
 		image: "dan.png"
 	},
 
 	dhalsim: {
-		name: "Dhalsim",
 		nickname: "Dhalsim",
+		value: "dhalsim",
 		health: 900,
 		attack: 30,
-		counterAttack: 30,
+		counterAttack: 35,
 		selected: false,
+		active: false,
 		image: "dhalsim.png"
 	},
 
-	ken: {
-		name: "Ken Masters",
-		nickname: "Ken",
-		health: 1000,
-		attack: 30,
+	chunLi: {
+		nickname: "Chun-Li",
+		value: "chunLi",
+		health: 950,
+		attack: 40,
 		counterAttack: 30,
 		selected: false,
-		image: "ken.png"
-	},
-
-	ryu: {
-		name: "Ryu",
-		nickname: "Ryu",
-		health: 1000,
-		attack: 30,
-		counterAttack: 30,
-		selected: false,
-		image: "ryu.png"
+		active: false,
+		image: "chunLi.png"
 	},
 
 	sakura: {
-		name: "Sakura Kasugano",
 		nickname: "Sakura",
+		value: "sakura",
 		health: 950,
 		attack: 25,
-		counterAttack: 25,
+		counterAttack: 35,
 		selected: false,
+		active: false,
 		image: "sakura.png"
 	},
 
-	elFuerte: {
-		name: "El Fuerte",
-		nickname: "El Fuerte",
-		health: 900,
+	guile: {
+		nickname: "Guile",
+		value: "guile",
+		health: 950,
 		attack: 30,
 		counterAttack: 30,
 		selected: false,
-		image: "elFuerte.png"
-	},
-
-	guile: {
-		name: "Guile",
-		nickname: "Guile",
-		health: 950,
-		attack: 20,
-		counterAttack: 30,
-		selected: false,
+		active: false,
 		image: "guile.png"
 	},
 
-	feiLong: {
-		name: "Fei Long",
-		nickname: "Fei Long",
-		health: 1000,
+	elFuerte: {
+		nickname: "El Fuerte",
+		value: "elFuerte",
+		health: 900,
 		attack: 30,
-		counterAttack: 30,
+		counterAttack: 40,
 		selected: false,
+		active: false,
+		image: "elFuerte.png"
+	},
+
+	feiLong: {
+		nickname: "Fei Long",
+		value: "feiLong",
+		health: 950,
+		attack: 30,
+		counterAttack: 40,
+		selected: false,
+		active: false,
 		image: "feiLong.png"
 	}
 };
 
+var fightersArray = [];
+var wins = 0;
+var imagesPath = "assets/images/";
+var player;
+var challenger;
+var defaultAttackPoint;
+var isPlayerSelected = false;
+var isChallengerSelected = false;
 
+//push fighters objects into fightersArray
+$.each(fighters, function(key) {
+	fightersArray.push(key);
+});
 
-	// Initialize Variables
-	// var fighters = [akuma, chunLi, dan, dhalsim, ken, ryu, sakura, elFuerte, guile, feiLong];
-	var wins = 0;
-	var imagesPath = "assets/images/";
-	var isPlayerSelected = false;
-	var isChallengerSelected = false;
-	
-	// // Create fighters
+var populateFightersRow = function(row, numFrom, numTo) {
+	for (var i = numFrom; i < numTo; i++) {	
+		var fighterContainer = $("<div>");		
+		fighterContainer.addClass("col-1 fighterSelect");
+		fighterContainer.attr("value", fighters[fightersArray[i]].value);
 
-	// var fightersRow = $("<div>");
-	// fightersRow.addClass("row");
+		var fighterPortrait = $("<img>");
+		fighterPortrait.attr("src", imagesPath + fighters[fightersArray[i]].image);
+		fighterPortrait.addClass("img-fluid text-center");
 
-	// for (var i = 0; i < fighters.length; i++) {
-	// 	var fighterCol = $("<div>");
-	// 	fighterCol.addClass("col-sm-2 col-md-2");
+		fighterContainer.append(fighterPortrait);
+		$(row).append(fighterContainer);
+	}
+}
 
-	// 	var fighterFig = $("<figure>");
+populateFightersRow("#firstRow", 0, 5);
+populateFightersRow("#secondRow", 5, 10);
 
-	// 	var fighterThumb = $("<img>");
-	// 	fighterThumb.addClass("img-responsive fighter-thumb");
-	// 	fighterThumb.attr("src", imagesPath + fighters[i].image);
+var fighterStats = function (obj, element) {
+	var health = $("<p>").text("Health: " + obj.health);
+	var attack = $("<p>").text("Attack: " + obj.attack);
+	var counterAttack = $("<p>").text("Counter Attack: " + obj.counterAttack);
 
-	// 	var fighterCaption = $("<figcaption>");
-	// 	fighterCaption.text(fighters[i].nickname);
+	$(element).append(health);
+	$(element).append(attack);
+	$(element).append(counterAttack);
+};
 
+var onHover = function () {
+	if (!isPlayerSelected && !fighters[$(this).attr("value")].selected) {
 
-	// 	fighterFig.append(fighterThumb);
-	// 	fighterFig.append(fighterCaption);
+		player = fighters[$(this).attr("value")];
 
-	// 	fighterCol.append(fighterFig);
-	// 	fightersRow.append(fighterCol);
-	// }
+		$(this).addClass("playerHover");
 
-	// $("#characters").append(fightersRow);
-
-	// $("figure").on("click", function() {
-	// 	$(this).appendTo("#fighter");
-	// });
-
-	var fighterStats = function (obj) {
-		var health = fighters[obj].health;
-		var attack = fighters[obj].attack;
-		var counterAttack = fighters[obj].counterAttack;
-		var printStats = health + "<br>" + attack + "<br>" + counterAttack;
-
-		return printStats;
-	};
-
-	var onHover = function () {
-		if (!isPlayerSelected && !fighters[$(this).attr("value")].selected) {
-			$(this).addClass("playerHover");
-
-			if ( $("#player img").length ) {
-				$("#player img").remove();
-				$("#player ")
-			}
-
-			var playerImage = $("<img>");
-			playerImage.addClass("img-fluid float-left playerAnimation");
-			playerImage.attr("src", imagesPath + fighters[$(this).attr("value")].image);
-			playerImage.attr("alt", fighters[$(this).attr("value")].name);
-
-			$("#player .fighterNickname").before(playerImage);
-
-			$("#player .fighterNickname").text(fighters[$(this).attr("value")].nickname);
-
-			// var row = $("<div>");
-			// row.addClass("row");
-
-			// var col = $("<div>");
-			// row.addClass("col-2 fighterStats");
-
-			// var stats = $("<p>");
-			// stats.text(fighterStats($(this).attr("value")));
-
-			// row.append(col.append(stats));
-
-			// $("#player").append(row);
-
-		} else if (!isChallengerSelected && !fighters[$(this).attr("value")].selected) {
-			$(this).addClass("challengerHover");
-
-			if ( $("#challenger img").length ) {
-				$("#challenger img").remove();
-			}
-
-			var challengerImage = $("<img>");
-			challengerImage.addClass("img-fluid float-right challengerAnimation");
-			challengerImage.attr("src", imagesPath + fighters[$(this).attr("value")].image);
-			challengerImage.attr("alt", fighters[$(this).attr("value")].name);
-
-			$("#challenger .fighterNickname").before(challengerImage);
-
-			$("#challenger .fighterNickname").text(fighters[$(this).attr("value")].nickname);
+		if ( $("#player img").length ) {
+			$("#player img").remove();
+			$(".playerStats").empty();
 		}
-	};
 
-	var outHover = function () {
-		if (!isPlayerSelected) {
-			$(this).removeClass("playerHover");
-		} else if (!isChallengerSelected) {
-			$(this).removeClass("challengerHover");
+		var playerImage = $("<img>");
+		playerImage.addClass("img-fluid playerAnimation");
+		playerImage.attr("src", imagesPath + player.image);
+		playerImage.attr("alt", player.name);
+
+		$("#player .fighterNickname").before(playerImage);
+
+		$("#player .fighterNickname").text(player.nickname);
+
+		fighterStats(player, ".playerStats");
+
+	} else if (!isChallengerSelected && !fighters[$(this).attr("value")].selected) {
+
+		challenger = fighters[$(this).attr("value")];
+
+		$(this).addClass("challengerHover");
+
+		if ( $("#challenger img").length ) {
+			$("#challenger img").remove();
+			$(".challengerStats").empty();
 		}
-	};
 
-	$(".fighterSelect").hover( onHover, outHover );
+		var challengerImage = $("<img>");
+		challengerImage.addClass("img-fluid challengerAnimation");
+		challengerImage.attr("src", imagesPath + challenger.image);
+		challengerImage.attr("alt", challenger.name);
 
-	$(".fighterSelect").on("click", function () {
-		if (!isPlayerSelected && !isChallengerSelected) {
-			isPlayerSelected = true;
-			fighters[$(this).attr("value")].selected = true;
-			$(this).addClass("playerHover");
-		}
-		else {
-			isChallengerSelected = true;
-			$(this).addClass("challengerHover");
-		} 
-	});
+		$("#challenger .fighterNickname").before(challengerImage);
+
+		$("#challenger .fighterNickname").text(challenger.nickname);
+
+		fighterStats(challenger, ".challengerStats");
+	}
+};
+
+var outHover = function () {
+	if (!isPlayerSelected) {
+		$(this).removeClass("playerHover");
+	} else if (!isChallengerSelected) {
+		$(this).removeClass("challengerHover");
+	}
+};
+
+$(".fighterSelect").hover( onHover, outHover );
+
+$(".fighterSelect").on("click", function () {
+	if (!isPlayerSelected && !isChallengerSelected && !fighters[$(this).attr("value")].selected) {
+		player = fighters[$(this).attr("value")];
+		defaultAttackPoint = player.attack;
+		player.selected = true;
+		isPlayerSelected = true;		
+		$(this).addClass("playerHover noCursor");
+	}
+	else if (isPlayerSelected && !isChallengerSelected && !fighters[$(this).attr("value")].selected) {
+		challenger = fighters[$(this).attr("value")];
+		challenger.selected = true;
+		isChallengerSelected = true;
+		$(this).addClass("challengerHover noCursor");
+		$(".characters").addClass("noCursor");
+	} 
+
+	else if (!isChallengerSelected && player === fighters[$(this).attr("value")] && !player.active) {
+		player.selected = false;
+		isPlayerSelected = false;
+		$(this).removeClass("playerHover noCursor");
+	}
+
+	else if (isPlayerSelected && isChallengerSelected && challenger === fighters[$(this).attr("value")] && !challenger.active) {
+		challenger.selected = false;
+		isChallengerSelected = false;
+		$(this).removeClass("playerHover noCursor");
+		$(".characters").removeClass("noCursor");
+	}
+});
+
+$("#attack").on("click", function() {
+
+	$(".playerStats").empty();
+	$(".challengerStats").empty();
+
+	player.active = true;
+	challenger.active = true;
+
+	challenger.health -= player.attack;
+	player.attack += defaultAttackPoint;
+
+	if (challenger.health > 0 ) player.health -= challenger.counterAttack;
+
+	fighterStats(player, ".playerStats");
+	fighterStats(challenger, ".challengerStats");
+
+	if (challenger.health <= 0) {
+		$("div[value=" + challenger.value + "]").addClass("defeated");
+		$("div[value=" + challenger.value + "]").removeClass("challengerHover");
+		$(".characters").removeClass("noCursor");
+		challenger.defeated = true;
+		isChallengerSelected = false;
+		$("#attack").attr("disabled","disabled");
+	}
+});
+
+$('#reset').click(function() {
+	location.reload();
+});
 
 });

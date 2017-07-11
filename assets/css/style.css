@@ -78,14 +78,19 @@ h2 {
 	margin: 0;
 	background: black;
 	border: 2px solid white;
+	cursor: pointer;
+}
+
+.noCursor, .noCursor div {
+	cursor: default;
 }
 
 .playerHover {
-	border: 3px solid blue;
+	border: 2px solid blue;
 }
 
 .challengerHover {
-	border: 3px solid red;
+	border: 2px solid red;
 }
 
 #challenger img {
@@ -133,10 +138,10 @@ h2 {
 }
 
 .fighterNickname {
-	font-size: 80px;
+	font-size: 5em;
 	position: absolute; 
-	bottom: 150px; 
-	left: 0; 
+	top: 65%;
+	transform: translateY(-65%);
 	width: 100%;
 	-webkit-text-stroke: 3px black;
 	color: white;
@@ -148,8 +153,46 @@ h2 {
 	1px 1px 0 #FFF;
 }
 
-.fighterStats {
-	border: 2px solid blue;
+.statsContainer {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+}
+
+.playerBox {
+	-webkit-transform: skew(-10deg);
+	-moz-transform: skew(-10deg);
+	-o-transform: skew(-10deg);
+}
+
+.challengerBox {
+	-webkit-transform: skew(10deg);
+	-moz-transform: skew(10deg);
+	-o-transform: skew(10deg);
+}
+
+.playerBox, .challengerBox {
+	width: 100px;
+	height: 150px;
+	background: rgba(0,0,0,.8);
+	border: 2px solid white;
+	margin: 20px;
+	text-align: center;
+	color: white;
+	font-size: 1.3em;
+	line-height: 1;
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+	padding: 0;
+}
+
+.playerBox h4, .challengerBox h4 {
+	background-color: white;
+	color: black;
+}
+
+.defeated img {
+	filter: grayscale(100%);
 }
 
 .hideTheme {

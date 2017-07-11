@@ -20,50 +20,34 @@
 				<div class="healthBar"></div>
 				<h1 class="fighterNickname"></h1>
 			</div>
-			<div id="buttons" class="col-2">
+			<div id="buttons" class="col-2 text-center">
 				<img src="assets/images/logo.png" alt="logo" class="img-fluid">
 				<p class="gameEdition text-center">RPG Edition</p>
+				<button id="reset" type="button" class="btn btn-primary btn-block">Reset</button>
+				<button id="attack" type="button" class="btn btn-danger btn-block">Attack</button>
 			</div>
 			<div id="challenger" class="col-5">
 				<div class="healthBar"></div>
 				<h1 class="fighterNickname"></h1>
 			</div>
 		</div>
+		<div class="row justify-content-between statsContainer">
+			<div class="col-3 playerBox">				
+				<section>
+					<h4>Player</h4>
+					<div class="playerStats"></div>
+				</section>
+			</div>
+			<div class="col-3 challengerBox">				
+				<section>
+					<h4>Challenger</h4>
+					<div class="challengerStats"></div>
+				</section>
+			</div>
+		</div>
 		<div class="characters">
-			<div class="row justify-content-md-center no-gutters">
-				<div class="col-1 fighterSelect" value="ryu">
-					<img src="assets/images/ryu.png" alt="Ryu" class="img-fluid text-center">
-				</div>
-				<div class="col-1 fighterSelect" value="ken">
-					<img src="assets/images/ken.png" alt="Ken" class="img-fluid text-center">
-				</div>
-				<div class="col-1 fighterSelect" value="akuma">
-					<img src="assets/images/akuma.png" alt="Akuma" class="img-fluid text-center">
-				</div>
-				<div class="col-1 fighterSelect" value="dan">
-					<img src="assets/images/dan.png" alt="Dan" class="img-fluid text-center">
-				</div>
-				<div class="col-1 fighterSelect" value="dhalsim">
-					<img src="assets/images/dhalsim.png" alt="Dhalsim" class="img-fluid text-center">
-				</div>
-			</div>
-			<div class="row justify-content-md-center no-gutters">
-				<div class="col-1 fighterSelect" value="chunLi">
-					<img src="assets/images/chunLi.png" alt="Chun Li" class="img-fluid text-center">
-				</div>
-				<div class="col-1 fighterSelect" value="elFuerte">
-					<img src="assets/images/elFuerte.png" alt="El Fuerte" class="img-fluid text-center">
-				</div>
-				<div class="col-1 fighterSelect" value="guile">
-					<img src="assets/images/guile.png" alt="Guile" class="img-fluid text-center">
-				</div>
-				<div class="col-1 fighterSelect" value="feiLong">
-					<img src="assets/images/feiLong.png" alt="Fei Long" class="img-fluid text-center">
-				</div>
-				<div class="col-1 fighterSelect" value="sakura">
-					<img src="assets/images/sakura.png" alt="Sakura" class="img-fluid text-center">
-				</div>
-			</div>
+			<div id="firstRow" class="row justify-content-md-center no-gutters"></div>
+			<div id="secondRow" class="row justify-content-md-center no-gutters"></div>
 		</div>
 	</div>
 
