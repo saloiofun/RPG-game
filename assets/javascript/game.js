@@ -30,7 +30,7 @@ $(document).ready(function() {
 		akuma: {
 			nickname: "Akuma",
 			value: "akuma",
-			health: 900,
+			health: 950,
 			attack: 30,
 			counterAttack: 45,
 			selected: false,
@@ -42,7 +42,7 @@ $(document).ready(function() {
 		dan: {
 			nickname: "Dan",
 			value: "dan",
-			health: 1000,
+			health: 1200,
 			attack: 20,
 			counterAttack: 35,
 			selected: false,
@@ -54,7 +54,7 @@ $(document).ready(function() {
 		dhalsim: {
 			nickname: "Dhalsim",
 			value: "dhalsim",
-			health: 900,
+			health: 1100,
 			attack: 25,
 			counterAttack: 40,
 			selected: false,
@@ -79,7 +79,7 @@ $(document).ready(function() {
 			nickname: "Sakura",
 			value: "sakura",
 			health: 950,
-			attack: 20,
+			attack: 35,
 			counterAttack: 30,
 			selected: false,
 			active: false,
@@ -115,7 +115,7 @@ $(document).ready(function() {
 			nickname: "Fei Long",
 			value: "feiLong",
 			health: 950,
-			attack: 25,
+			attack: 30,
 			counterAttack: 40,
 			selected: false,
 			active: false,
@@ -280,10 +280,12 @@ $(document).ready(function() {
 			updateFightersInfo(player,"player");
 			updateFightersInfo(challenger,"challenger");
 			$("#result").html("You <span>L</span>ose");
+			$(".characters").addClass("noCursor");
 		}
 		else if (player.health <= 0) {
 			updateFightersInfo(player,"player");
 			$("#result").html("You <span>L</span>ose");
+			$(".characters").addClass("noCursor");
 		}
 		else if (challenger.health <= 0) {
 			updateFightersInfo(challenger,"challenger");
