@@ -11,7 +11,8 @@ $(document).ready(function() {
 			counterAttack: 45,
 			selected: false,
 			active: false,
-			image: "ryu.png"
+			image: "ryu.png",
+			sound: "ryu.wav"
 		},
 
 		ken: {
@@ -22,7 +23,8 @@ $(document).ready(function() {
 			counterAttack: 45,
 			selected: false,
 			active: false,
-			image: "ken.png"
+			image: "ken.png",
+			sound: "ken.wav"
 		},
 
 		akuma: {
@@ -33,7 +35,8 @@ $(document).ready(function() {
 			counterAttack: 45,
 			selected: false,
 			active: false,
-			image: "akuma.png"
+			image: "akuma.png",
+			sound: "akuma.wav"
 		},
 
 		dan: {
@@ -44,7 +47,8 @@ $(document).ready(function() {
 			counterAttack: 35,
 			selected: false,
 			active: false,
-			image: "dan.png"
+			image: "dan.png",
+			sound: "dan.wav"
 		},
 
 		dhalsim: {
@@ -55,7 +59,8 @@ $(document).ready(function() {
 			counterAttack: 40,
 			selected: false,
 			active: false,
-			image: "dhalsim.png"
+			image: "dhalsim.png",
+			sound: "dhalsim.wav"
 		},
 
 		chunLi: {
@@ -66,7 +71,8 @@ $(document).ready(function() {
 			counterAttack: 35,
 			selected: false,
 			active: false,
-			image: "chunLi.png"
+			image: "chunLi.png",
+			sound: "chunLi.wav"
 		},
 
 		sakura: {
@@ -77,7 +83,8 @@ $(document).ready(function() {
 			counterAttack: 30,
 			selected: false,
 			active: false,
-			image: "sakura.png"
+			image: "sakura.png",
+			sound: "sakura.wav"
 		},
 
 		guile: {
@@ -88,7 +95,8 @@ $(document).ready(function() {
 			counterAttack: 40,
 			selected: false,
 			active: false,
-			image: "guile.png"
+			image: "guile.png",
+			sound: "guile.wav"
 		},
 
 		elFuerte: {
@@ -99,7 +107,8 @@ $(document).ready(function() {
 			counterAttack: 35,
 			selected: false,
 			active: false,
-			image: "elFuerte.png"
+			image: "elFuerte.png",
+			sound: "elFuerte.wav"
 		},
 
 		feiLong: {
@@ -110,13 +119,15 @@ $(document).ready(function() {
 			counterAttack: 40,
 			selected: false,
 			active: false,
-			image: "feiLong.png"
+			image: "feiLong.png",
+			sound: "feiLong.wav"
 		}
 	};
 
 	//declare variables
 	var fightersArray = [];
 	var imagesPath = "assets/images/";
+	var soundPath = "assets/sound/";
 	var player;
 	var challenger;
 	var defaultAttackPoint;
@@ -212,6 +223,8 @@ $(document).ready(function() {
 			player.selected = true;
 			isPlayerSelected = true;		
 			$(this).addClass("playerHover noCursor");
+			var audio = new Audio(soundPath + player.sound);
+			audio.play();
 		}
 		else if (isPlayerSelected && !isChallengerSelected && !fighters[$(this).attr("value")].selected) {
 			challenger = fighters[$(this).attr("value")];
@@ -221,6 +234,8 @@ $(document).ready(function() {
 			$(".characters").addClass("noCursor");
 			$("#result").empty();
 			$("#attack").removeAttr("disabled","disabled");
+			var audio = new Audio(soundPath + challenger.sound);
+			audio.play();
 		}
 		else if (!isChallengerSelected && player === fighters[$(this).attr("value")] && !player.active) {
 			player.selected = false;
