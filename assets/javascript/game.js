@@ -174,28 +174,20 @@ $(document).ready(function() {
 		fighterImage.attr("alt", obj.name);
 
 		$("#"+fighter + " .fighterNickname").before(fighterImage);
-
 		$("#"+fighter + " .fighterNickname").text(obj.nickname);
-
 		fighterStats(obj, "."+fighter+"Stats");
 	}
 
 	//function for mouseIn fighter
 	var onHover = function () {
-		if (!isPlayerSelected && !fighters[$(this).attr("value")].selected) {
-			
+		if (!isPlayerSelected && !fighters[$(this).attr("value")].selected) {			
 			player = fighters[$(this).attr("value")];
-
 			$(this).addClass("playerHover");
-
 			fighterSlide(player, "player");
 
 		} else if (!isChallengerSelected && !fighters[$(this).attr("value")].selected) {
-
 			challenger = fighters[$(this).attr("value")];
-
 			$(this).addClass("challengerHover");
-
 			fighterSlide(challenger, "challenger");
 		}
 	};
@@ -225,11 +217,10 @@ $(document).ready(function() {
 			challenger = fighters[$(this).attr("value")];
 			challenger.selected = true;
 			isChallengerSelected = true;
-			$("#attack").removeAttr("disabled","disabled");
 			$(this).addClass("challengerHover noCursor");
 			$(".characters").addClass("noCursor");
-			$("#attack").removeAttr("disabled","disabled");
 			$("#result").empty();
+			$("#attack").removeAttr("disabled","disabled");
 		}
 		else if (!isChallengerSelected && player === fighters[$(this).attr("value")] && !player.active) {
 			player.selected = false;
@@ -265,12 +256,10 @@ $(document).ready(function() {
 
 		challenger.health -= player.attack;
 		player.attack += defaultAttackPoint;
-
 		player.health -= challenger.counterAttack;
 
 		fighterStats(player, ".playerStats");
 		fighterStats(challenger, ".challengerStats");
-
 
 		if (player.health <= 0 && challenger.health <= 0) {
 			updateFightersInfo(player,"player");
