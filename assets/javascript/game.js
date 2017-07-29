@@ -182,7 +182,7 @@ $(document).ready(function() {
 		var fighterImage = $("<img>");
 		fighterImage.addClass("img-fluid");
 		fighterImage.attr("src", imagesPath + obj.image);
-		fighterImage.attr("alt", obj.name);
+		fighterImage.attr("alt", obj.nickname);
 
 		$("#"+fighter + " .fighterNickname").before(fighterImage);
 		$("#"+fighter + " .fighterNickname").text(obj.nickname);
@@ -276,21 +276,31 @@ $(document).ready(function() {
 		fighterStats(player, ".playerStats");
 		fighterStats(challenger, ".challengerStats");
 
+		if (player.health > 0 && challenger.health > 0) {
+			$("#result").addClass("normal-text");
+			var fightStatus = "<p>You attacked " + challenger.nickname + " for " + player.attack + " damage.</p>"
+			+ "<p>" + challenger.nickname + " attacked you back for " + challenger.counterAttack + " damage.</p>";
+			$("#result").html(fightStatus);
+		}
+
 		if (player.health <= 0 && challenger.health <= 0) {
+			$("#result").removeClass("normal-text");
 			updateFightersInfo(player,"player");
 			updateFightersInfo(challenger,"challenger");
-			$("#result").html("You <span>L</span>ose");
+			$("#result").html("<h1>You <span>L</span>ose</h1>");
 			$(".characters").addClass("noCursor");
 		}
 		else if (player.health <= 0) {
+			$("#result").removeClass("normal-text");
 			updateFightersInfo(player,"player");
-			$("#result").html("You <span>L</span>ose");
+			$("#result").html("<h1>You <span>L</span>ose</h1>");
 			$(".characters").addClass("noCursor");
 		}
 		else if (challenger.health <= 0) {
+			$("#result").removeClass("normal-text");
 			updateFightersInfo(challenger,"challenger");
 			isChallengerSelected = false;
-			$("#result").html("You <span>W</span>in");
+			$("#result").html("<h1>You <span>W</span>in</h1>");			
 		}
 	});
 

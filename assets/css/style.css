@@ -196,3 +196,10 @@ h2 {
 .defeated img {
 	filter: grayscale(100%);
 }
+
+.normal-text {
+	margin-top: 1.5em;
+	font-family: 'Montserrat', sans-serif;
+	color: white !important;
+	font-size: 1.8em;
+}
